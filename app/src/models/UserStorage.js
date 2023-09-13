@@ -4,7 +4,7 @@ class UserStorage {
   static #users = {
     id: ["woorimIT", "나개발", "김팀장", "dev_s"],
     psword: ["1234", "1234", "123456", "asdf"],
-    nams: ["우리밋", "나개발", "김팀장", "썬"],
+    name: ["우리밋", "나개발", "김팀장", "썬"],
   };
 
   static getUsers(...fields) {
@@ -29,6 +29,14 @@ class UserStorage {
     }, {});
 
     return userInfo;
+  }
+
+  static save(userInfo) {
+    const users = this.#users;
+    users.id.push(userInfo.id);
+    users.name.push(userInfo.name);
+    users.psword.push(userInfo.psword);
+    return { success: true };
   }
 } //class 안에 변수 할당할 때는 const 같은 명령어 필요 없음
 
