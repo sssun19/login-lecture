@@ -1,0 +1,12 @@
+{
+  "name": "login-lecture",
+  "version": "1.0.0",
+  "description": "백엔드 맛보기 강의\r Youtube woorimIT 강좌를 토대로 공부\r (https://youtube.com/playlist?list=PLSK4WsJ8JS4cQ-niGNum4bkK_THHOizTs&si=qv7viRCTVjehhJax)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./app/bin/www.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
