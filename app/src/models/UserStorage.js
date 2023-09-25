@@ -1,6 +1,7 @@
 "use strict";
+//Notion -> login_lecture/Node.js 참조
 
-const fs = require("fs").promises;
+const db = require("../config/db");
 
 class UserStorage {
   static #getUsers(data, isAll, fields) {
@@ -16,15 +17,6 @@ class UserStorage {
     return newUsers;
   }
 
-  static getUsers(isAll, ...fields) {
-    return fs
-      .readFile("./app/src/databases/users.json")
-      .then((data) => {
-        return this.#getUsers(data, isAll, fields);
-      })
-      .catch(console.error);
-  }
-
   static #getUserInfo(data, id) {
     const users = JSON.parse(data);
     const idx = users.id.indexOf(id);
@@ -37,35 +29,27 @@ class UserStorage {
     return userInfo;
   }
 
+  static getUsers(isAll, ...fields) {}
+
   static getUserInfo(id) {
-    return fs
-      .readFile("./app/src/databases/users.json")
-      .then((data) => {
-        return this.#getUserInfo(data, id);
-      })
-      .catch(console.error);
+    return new Promise((resolve, reject) => {
+      const query = "SELECT * FROM users where id = ?;";
+      db.query(query, [id], (err, data) => {
+        if (err) reject(`${err}`);
+        resolve(data[0]);
+      });
+    });
   }
 
   static async save(userInfo) {
-    // const users = this.#users;
-    // users.id.push(userInfo.id);
-    // users.name.push(userInfo.name);
-    // users.psword.push(userInfo.psword);
-    // return { success: true };
-
-    const users = await this.getUsers(true);
-    if (users.id.includes(userInfo.id)) {
-      throw "이미 존재하는 아이디입니다.";
-    }
-    users.id.push(userInfo.id);
-    users.name.push(userInfo.name);
-    users.psword.push(userInfo.psword);
-
-    //데이터 추가
-    fs.writeFile("./app/src/databases/users.json", JSON.stringify(users));
-
-    return { success: true };
+    return new Promise((resolve, reject) => {
+      const query = "insert into users (id, name, psword) values (?, ?, ?);";
+      db.query(query, [userInfo.id, userInfo.name, userInfo.psword], (err) => {
+        if (err) reject(`${err}`);
+        resolve({ success: true });
+      });
+    });
   }
-} //class 안에 변수 할당할 때는 const 같은 명령어 필요 없음
+}
 
 module.exports = UserStorage;
