@@ -3,20 +3,20 @@
 백엔드 맛보기 강의
 Youtube woorimIT 강좌를 토대로 공부<br/>
 (https://youtube.com/playlist?list=PLSK4WsJ8JS4cQ-niGNum4bkK_THHOizTs&si=qv7viRCTVjehhJax)
-
+<br/>
 🙌 Node.js 로 서버 개발을 해보자!
-
+<br/>
 express vs http
-
-//express 로 서버 개발
-const express = require('express');
-const app = express();
-const PORT = 3000;
-
-app.get("/", (req, res)=> {
-res.send('루트 경로입니다.');
-});
-
+<br/>
+//express 로 서버 개발<br/>
+const express = require('express');<br/>
+const app = express();<br/>
+const PORT = 3000;<br/>
+<br/>
+app.get("/", (req, res)=> {<br/>
+res.send('루트 경로입니다.');<br/>
+});<br/>
+<br/>
 app.listen(PORT, ()=> {
 console.log(`express를 이용한 port 번호 ${PORT} 번 서버입니다.`);
 });
