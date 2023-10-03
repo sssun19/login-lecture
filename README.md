@@ -1,7 +1,7 @@
 # login-lecture
 
 백엔드 맛보기 강의
-Youtube woorimIT 강좌를 토대로 공부
+Youtube woorimIT 강좌를 토대로 공부\n
 (https://youtube.com/playlist?list=PLSK4WsJ8JS4cQ-niGNum4bkK_THHOizTs&si=qv7viRCTVjehhJax)
 
 🙌 Node.js 로 서버 개발을 해보자!
