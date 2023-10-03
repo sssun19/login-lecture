@@ -10,43 +10,43 @@ Youtube woorimIT 강좌를 토대로 공부<br/>
 <br/>
 <h2>express vs http</h2>
 <br/>
-//express 로 서버 개발<br/>
+//express 로 서버 개발<br/><br/>
 const express = require('express');<br/>
 const app = express();<br/>
 const PORT = 3000;<br/>
-<br/>
+<br/><br/>
 app.get("/", (req, res)=> {<br/>
 res.send('루트 경로입니다.');<br/>
 });<br/>
 <br/>
-app.listen(PORT, ()=> {
-console.log(`express를 이용한 port 번호 ${PORT} 번 서버입니다.`);
-});
-
-//http 로 서버 개발
-const http = require('http');
-const PORT = 3001;
-const app = http.createServer((req, res)=>{
-res.writeHead(200, {
-"Content-Type" : "text/html; charset=utf-8"});
-
-console.log(req.url);
-const \_url = req.url;
-
-if (\_url === "/") {
-res.end('루트 경로입니다.');
-} else if (\_url === "/login") {
-res.end('로그인 화면입니다.');
-}
-});
-
-app.listen(PORT, ()=>{
-console.log(`http를 이용한 port 번호 ${PORT} 번 서버입니다.`);
-});
-
-💁🏻‍♀️ http를 이용하여 서버를 개발하면 charset도 따로 처리해 주어야 하고, app.get("/") 처럼 바로 경로를 가져오지 못해서 url 파싱을 해주어야 하는 번거로움
-💁🏻‍♀️ 후처리 과정이 많다보니 코드가 길어질 수밖에 없어서 가독성이 좋지 못함
-
+app.listen(PORT, ()=> {<br/>
+console.log(`express를 이용한 port 번호 ${PORT} 번 서버입니다.`);<br/>
+});<br/>
+<br/><br/>
+//http 로 서버 개발<br/><br/>
+const http = require('http');<br/>
+const PORT = 3001;<br/>
+const app = http.createServer((req, res)=>{<br/>
+res.writeHead(200, {<br/>
+"Content-Type" : "text/html; charset=utf-8"});<br/>
+<br/><br/>
+console.log(req.url);<br/>
+const \_url = req.url;<br/>
+<br/><br/>
+if (\_url === "/") {<br/>
+res.end('루트 경로입니다.');<br/>
+} else if (\_url === "/login") {<br/>
+res.end('로그인 화면입니다.');<br/>
+}<br/>
+});<br/>
+<br/><br/>
+app.listen(PORT, ()=>{<br/>
+console.log(`http를 이용한 port 번호 ${PORT} 번 서버입니다.`);<br/>
+});<br/>
+<br/><br/>
+💁🏻‍♀️ http를 이용하여 서버를 개발하면 charset도 따로 처리해 주어야 하고, app.get("/") 처럼 바로 경로를 가져오지 못해서 url 파싱을 해주어야 하는 번거로움<br/>
+💁🏻‍♀️ 후처리 과정이 많다보니 코드가 길어질 수밖에 없어서 가독성이 좋지 못함<br/>
+<br/><br/>
 느낀점 : http, express 두 방법 모두 실습해보니 express 모듈을 사용하여 서버를 개발하는 것이 얼마나 편리한지 알게 되었다.
 대신 궁금한 점이 생겼는데 그렇다면 현재 서버 개발은 모두 express 모듈을 사용하는지? 아니라면 http 내장 라이브러리를 사용해야하는 경우도 있는 것인지?
 추가로 공부하면 좋을 것 같다.
