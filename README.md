@@ -1,9 +1,6 @@
 # login-lecture
 
-백엔드 맛보기 강의
-Youtube woorimIT 강좌를 토대로 공부<br/>
-(https://youtube.com/playlist?list=PLSK4WsJ8JS4cQ-niGNum4bkK_THHOizTs&si=qv7viRCTVjehhJax)
-<br/>
+
 <br/>
 🙌 Node.js 로 서버 개발을 해보자!
 <br/>
@@ -64,7 +61,7 @@ javascript를 포함한 html 파일을 편리하게 작성하기 위함<br/>
 🙌 Node.js 에서 mvc 디자인 적용하기<br/>
 여러 갈래로 나누어진 파일들을 Model View Controller 세가지로 분리해 관리하는 디자인 기법<br/>
 mvc 패턴의 장점<br/>
-1. 중복된 코드를 줄일 수 있어 코드의 길이가 짧아진다. (가독성 향상)
+1. 중복된 코드를 줄일 수 있어 코드의 길이가 짧아진다. (가독성 향상)<br/>
 2. 의존성을 낮추어 유지보수하기 편해진다.<br/>
 3. 개발 시간이 단축된다.<br/>
 <br/>
