@@ -235,3 +235,48 @@ class User {
   }
 }
 ```
+
+- UserStorage.js
+```
+const db = require("../config/db");
+
+static getUserInfo(id) {
+  return new Promise((resolve, reject) => {
+    const query = "SELECT * FROM users where id = ?;";
+    db.query(query, [id], (err, data) => {
+      if (err) reject(`${err}`);
+      resolve(data[0]);
+    });
+  });
+}
+```
+> DB 에 query문을 전송할 때는 일반적으로 비동기 통신으로 구현한다. query 결과를 기다렸다가 성공 또는 실패 응답을 받은 뒤 처리해야 하기 때문.<br/>
+> Promise 객체는 query 전송이 성공했을 때 resolve 를, 실패했을 때 reject 를 호출한다.<br/>
+> db.query 메서드 파라미터로 쿼리문, id 데이터값, 콜백 함수를 넘겨 준다. <br/>
+> query 전송이 성공하면 Promise 객체가 반환하는 값 중 인덱스 0번째 (사용자 정보) 를 반환한다.
+
+- mysql 연동 방법 (db.js)
+```
+const mysql = require("mysql2");
+
+const db = mysql.createConnection({
+  host: process.env.DB_HOST, //dotenv 암호화
+  user: process.env.DB_USER,
+  ...
+});
+
+db.connect();
+
+module.exports = db;
+```
+
+💁🏻‍♀️ .env ?
+
+- dotenv 모듈을 이용해 사용자의 아이디/비밀번호나 개인정보를 암호화 할 수 있다.
+```
+PORT = 3000;
+
+DB_HOST = "...";
+DB_USER = "...";
+...
+```
