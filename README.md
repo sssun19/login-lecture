@@ -183,3 +183,55 @@ body에 실제 전송할 데이터 값을 담기 (JSON.stringfigy() 메서드로
 서버에서 success 응답을 주었을 경우 페이지 redirect 하여 "/" 루트로 이동, 응답 실패인 경우 오류 메세지 알림 창으로 표시
 
 응답이 오지 않은 경우(전송 에러) .catch 구문으로 들어가 콘솔에 에러 메세지 출력
+
+- POST 방식으로 로그인 요청을 보낸 경우
+```
+//index.js
+router.post("/login", ctrl.process.login);
+
+//home.ctrl.js
+...
+const process = {
+  login: async (req, res) => {
+    const user = new User(req.body);
+    console.log("req.body: ", req.body);
+    const response = await user.login();
+    console.log(response);
+    return res.json(response);
+  }
+};
+```
+💁🏻‍♀️ async, await 란?
+
+- node.js에서 비동기 통신을 구현하는 방법으로 async와 await 가 있다.
+- async 함수는 항상 Promise 객체를 반환하며, await 키워드로 비동기 작업을 처리할 수 있다.
+- await 키워드가 붙은 메서드는 async 함수 내에서만 사용할 수 있으며, Promise 가 반환될 때까지 코드 실행을 일시 중지한다.
+
+```
+//User.js
+
+const UserStorage = require("./UserStorage");
+
+class User {
+  constructor(body) {
+    this.body= body;
+  }
+
+  async login() {
+    const client = this.body;
+    try {
+      const user = await UserStorage.getUserInfo(client.id);
+  
+    if (user) {
+      if (user.id === client.id && user.psword === client.psword) {
+        return {success: true};
+        }
+        return {success: false, msg: "비밀번호가 틀렸습니다."};
+      }
+      return {success: false, msg: "존재하지 않는 아이디입니다."};
+    } catch (err) {
+      return {success: false, msg: err};
+    }
+  }
+}
+```
