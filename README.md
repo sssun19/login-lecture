@@ -118,7 +118,24 @@ app.use("/", home); // use : 미들 웨어를 등록해주는 메서드
 home.ctrl.js 파일은 루트 경로 home과 login을 담고 있고 render 메서드로 해당 ejs 파일 찾아가는 로직 구현
 
 
-
-
-
 ## login 로직
+- login.ejs
+```
+<head>
+  <script src="/js/home/login.js" defer></script>
+..생략..
+</head>
+<body>
+  ...
+  <input type="text" id="id"/>
+  <input type="password" id="psword"/>
+  <p id="button"> login </p>
+  <p class="message">
+    Not registered? <a href="/register"> Create an account </a></p>
+  ...
+```
+> defer : 페이지가 모두 로드된 후에 해당 외부 스크립트가 실행됨
+>
+> id 속성으로 login.js 에 데이터값 넘겨주기
+>
+> a href 링크로 로그인 화면에서 바로 register.ejs 로 이동
