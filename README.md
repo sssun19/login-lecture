@@ -134,8 +134,52 @@ home.ctrl.js 파일은 루트 경로 home과 login을 담고 있고 render 메�
     Not registered? <a href="/register"> Create an account </a></p>
   ...
 ```
-> defer : 페이지가 모두 로드된 후에 해당 외부 스크립트가 실행됨
->
-> id 속성으로 login.js 에 데이터값 넘겨주기
->
-> a href 링크로 로그인 화면에서 바로 register.ejs 로 이동
+💁🏻‍♀️  defer : 페이지가 모두 로드된 후에 해당 외부 스크립트가 실행됨
+
+id 속성으로 login.js 에 데이터값 넘겨주기
+
+a href 링크로 로그인 화면에서 바로 register.ejs 로 이동
+
+- login.js
+```
+const id = document.querySelector("#id"),
+  psword = document.querySelector("#psword"),
+  loginBtn = document.querySelector("#button");
+
+loginBtn.addEventListener("click", login); //loginBtn 버튼 click 시 login 이벤트 발생
+
+function login() {
+  const req = {
+    id : id.value,
+    psword : psword.value,
+  };
+  console.log(JSON.stringify(req));
+
+  fetch("/login", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(req),
+  })
+  .then((res) => res.json())
+  .then((res) => {
+    if (res.success) {
+      location.href="/";
+    } else {
+      alert(res.msg);
+    }
+  })
+  .catch((err) => { console.error(new Error("로그인 중 에러 발생"));
+  });
+}
+```
+💁🏻‍♀️ login 화면에서 입력 받은 id, psword 값을 담은 req 객체 생성
+
+fetch 메서드로 데이터 전송. POST 방식, headers 에는 json 타입으로 데이터를 전송할 수 있도록 설정.
+
+body에 실제 전송할 데이터 값을 담기 (JSON.stringfigy() 메서드로 req 객체를 json 데이터 타입으로 변환해서 보냄)
+
+서버에서 응답이 오면 res로 받아 json 타입으로 변환 (res.json())
+
+서버에서 success 응답을 주었을 경우 페이지 redirect 하여 "/" 루트로 이동, 응답 실패인 경우 오류 메세지 알림 창으로 표시
+
+응답이 오지 않은 경우(전송 에러) .catch 구문으로 들어가 콘솔에 에러 메세지 출력
