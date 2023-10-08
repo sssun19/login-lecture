@@ -55,7 +55,7 @@ app.listen(PORT, ()=>{
 💁🏻‍♀️ 후처리 과정이 많다보니 코드가 길어질 수밖에 없어서 가독성이 좋지 못함<br/>
 <br/><br/>
 <br/>
-<h2>🙌 app setting (ejs)</h2>
+<h2>🙌 app setting</h2>
 
 ```
 app.set("views", "./views"); //views 디렉토리 위치 세팅
@@ -68,8 +68,10 @@ app.get("/", (req, res)=>{
 
 💁🏻‍♀️ ejs란?<br/>
 NodeJS와 Express에서 많이 사용하고 있는 템플릿 엔진<br/>
-javascript를 포함한 html 파일을 편리하게 작성하기 위함<br/>
-<br/>
+javascript를 포함한 html 파일을 편리하게 작성하기 위함
+
+app.set으로 views 디렉토리 위치를 ./views 로 지정했기 때문에 home/index 만 설정해도 알아서 views 파일 하위의 폴더를 조회함
+
 🙌 Node.js 에서 mvc 디자인 적용하기<br/>
 여러 갈래로 나누어진 파일들을 Model View Controller 세가지로 분리해 관리하는 디자인 기법<br/>
 mvc 패턴의 장점<br/>
@@ -112,3 +114,11 @@ const home = require("./routes/home"); //module.exports 로 내보낸 파일들�
 
 app.use("/", home); // use : 미들 웨어를 등록해주는 메서드
 ```
+💁🏻‍♀️ router.get 메서드를 이용해 루트에 맞는 컨트롤러 찾아갈 수 있도록 분리<br/>
+home.ctrl.js 파일은 루트 경로 home과 login을 담고 있고 render 메서드로 해당 ejs 파일 찾아가는 로직 구현
+
+
+
+
+
+## login 로직
